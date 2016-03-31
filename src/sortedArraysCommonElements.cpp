@@ -15,8 +15,8 @@ ERROR CASES: Return NULL for invalid inputs.
 
 NOTES:
 */
-
 #include <iostream>
+
 
 struct transaction {
 	int amount;
@@ -25,5 +25,81 @@ struct transaction {
 };
 
 struct transaction * sortedArraysCommonElements(struct transaction *A, int ALen, struct transaction *B, int BLen) {
-	return NULL;
+
+	int in = 0, check, k = 0, i = 0, j = 0;
+	struct transaction *same_trans = (transaction *)malloc(sizeof(transaction)*ALen);
+
+	if (A == NULL||B==NULL)
+		return 0;
+	
+	for (i = 0; i < ALen; i++)
+	{
+		check = 0;
+		for (j = 6; j < 10; j++)
+		{
+			if (A[i].date[j]>B[in].date[j])
+			{
+				check = 1;
+				in++;
+				i--;
+				break;
+			}
+			else
+			if (A[i].date[j] < B[in].date[j])
+			{
+				check=1;
+			}
+		}
+		if (check == 1)
+		{
+			continue;
+		}
+		else
+		{
+			for (j = 3; j < 5; j++)
+			{
+				if (A[i].date[j]>B[in].date[j])
+				{
+					in++;
+					i--;
+					check = 2;
+				}
+				else
+				if (A[i].date[j] < B[in].date[j])
+				{
+					check = 2;
+				}
+			}
+			if (check == 2)
+				continue;
+			else
+			{
+				for (j = 3; j < 5; j++)
+				{
+					if (A[i].date[j]>B[in].date[j])
+					{
+						in++;
+						i--;
+						check = 3;
+					}
+					else
+					if (A[i].date[j] < B[in].date[j])
+					{
+						check = 3;
+					}
+				}
+				if (check == 3)
+					continue;
+				else
+				{
+					same_trans[k] = A[i];
+					k++;
+				}
+			}
+		}
+	
+	}
+	if (k == 0)
+		return 0;
+	return same_trans;
 }

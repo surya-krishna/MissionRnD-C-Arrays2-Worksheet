@@ -21,5 +21,26 @@ struct transaction {
 };
 
 int countGreaterNumbers(struct transaction *Arr, int len, char *date) {
-	return -1;
+	int i,j,check=0;
+	for (i = 0; i < len; i++)
+	{
+		for (j = 0; j < 10; j++)
+		{
+			if (Arr[i].date[j] != date[j])
+			{
+				break;
+			}
+		}
+		if (j == 10)
+		{
+			check = 1; continue;
+		}
+		if (check == 1)
+		{
+			return len - i;
+		}
+
+	}
+
+	return 0; 
 }

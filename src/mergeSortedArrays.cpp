@@ -23,5 +23,108 @@ struct transaction {
 };
 
 struct transaction * mergeSortedArrays(struct transaction *A, int ALen, struct transaction *B, int BLen) {
-	return NULL;
+
+	struct transaction *merg_array = (transaction*)malloc(sizeof(transaction)*(ALen + BLen));
+	int in = 0, check, k = 0, i = 0, j = 0;
+
+	if (A == NULL || B == NULL)
+		return 0;
+
+	for (i = 0; i < ALen && in<BLen; i++)
+	{
+		check = 0;
+		for (j = 6; j < 10; j++)
+		{
+			if (A[i].date[j]>B[in].date[j])
+			{
+				merg_array[k] = B[in];
+				check = 1;
+				in++;
+				i--;
+				k++;
+				break;
+			}
+			else
+			if (A[i].date[j] < B[in].date[j])
+			{
+				merg_array[k] = A[i];
+				k++;
+				check = 1;
+			}
+		}
+		if (check == 1)
+		{
+			continue;
+		}
+		else
+		{
+			for (j = 3; j < 5; j++)
+			{
+				if (A[i].date[j]>B[in].date[j])
+				{
+					merg_array[k] = B[in];
+					in++;
+					i--;
+					k++;
+					check = 2;
+				}
+				else
+				if (A[i].date[j] < B[in].date[j])
+				{
+					merg_array[k] = A[i];
+					k++;
+					check = 2;
+				}
+			}
+			if (check == 2)
+				continue;
+			else
+			{
+				for (j = 3; j < 5; j++)
+				{
+					if (A[i].date[j]>B[in].date[j])
+					{
+						merg_array[k] = B[in];
+						k++;
+						in++;
+						i--;
+						check = 3;
+					}
+					else
+					if (A[i].date[j] < B[in].date[j])
+					{
+						merg_array[k] = A[i];
+						k++;
+						check = 3;
+					}
+				}
+				if (check == 3)
+					continue;
+				else
+				{
+					merg_array[k] = B[in];
+					merg_array[k + 1] = A[i];
+					in++;
+					k = k + 2;
+				}
+			}
+		}
+
+	}
+
+	while (i < ALen)
+	{
+		merg_array[k] = A[i];
+		k++;
+		i++;
+	}
+
+	while (in < BLen)
+	{
+		merg_array[k] = B[in];
+	k++;
+	in++;
+}
+	return merg_array;
+
 }
